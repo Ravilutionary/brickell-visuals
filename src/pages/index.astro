@@ -11,6 +11,8 @@ import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import BlogTeaser from '../components/BlogTeaser.astro';
 import BookingForm from '../components/BookingForm.astro';
 
+import SectionHeader from '../components/SectionHeader.astro';
+
 // Fetch Data from Collections
 const services = await getCollection('services'); // Already an array of entries
 const gallery = (await getCollection('gallery')).map(e => e.data);
@@ -31,12 +33,13 @@ const blogPosts = await getCollection('blog');
     <!-- Signature Services -->
     <section id="services" class="py-24 2xl:py-32 transition-colors duration-500 border-b border-base-300">
         <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 2xl:mb-24 gap-8">
-                <div class="max-w-2xl 2xl:max-w-4xl">
-                    <h2 class="text-4xl md:text-5xl 2xl:text-7xl font-serif font-bold text-brand-navy dark:text-white mb-6 uppercase tracking-tight">Signature <span class="text-brand-sunset italic font-normal lowercase">Services</span></h2>
-                    <p class="text-lg 2xl:text-2xl font-light text-base-content/70">High-volume deliverables with artisanal precision. Specifically engineered for the Miami market's fast-paced demand.</p>
-                </div>
-                <div class="bg-base-200/50 border border-base-300 p-6 2xl:p-10 rounded-sm backbone-blur-sm">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-8 overflow-visible">
+                <SectionHeader 
+                    title="Signature" 
+                    accent="Services" 
+                    description="High-volume deliverables with artisanal precision. Specifically engineered for the Miami market's fast-paced demand."
+                />
+                <div class="bg-base-200/50 border border-base-300 p-6 2xl:p-10 rounded-sm backbone-blur-sm transform md:-translate-y-12 2xl:-translate-y-16">
                     <p class="text-brand-sunset font-bold uppercase tracking-widest text-xs 2xl:text-base mb-2">Triple-Threat Bundle</p>
                     <p class="text-3xl 2xl:text-5xl font-serif font-bold text-brand-navy dark:text-white mb-2 underline decoration-brand-sunset">Save 40%</p>
                     <p class="text-xs 2xl:text-sm font-light">All 3 categories in one 4hr session.</p>
@@ -61,10 +64,13 @@ const blogPosts = await getCollection('blog');
         }
     }" data-items={JSON.stringify(gallery)}>
         <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-16 2xl:mb-24 gap-8">
-                <h2 class="text-4xl md:text-5xl 2xl:text-7xl font-serif font-bold text-brand-navy dark:text-white uppercase tracking-tight">Brickell <span class="text-brand-sunset italic font-normal lowercase">Portfolio</span></h2>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-0 gap-8">
+                <SectionHeader 
+                    title="Brickell" 
+                    accent="Portfolio"
+                />
                 
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4 p-1 2xl:p-2 bg-base-300/50 backdrop-blur-sm rounded-sm">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 p-1 2xl:p-2 bg-base-300/50 backdrop-blur-sm rounded-sm transform md:-translate-y-12 2xl:-translate-y-16">
                     <button @click="filter = 'all'" :class="filter === 'all' ? 'bg-brand-navy text-white shadow-lg shadow-brand-navy/30' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all duration-300">All</button>
                     <button @click="filter = 'portrait'" :class="filter === 'portrait' ? 'bg-brand-navy text-white shadow-lg' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all">Portraits</button>
                     <button @click="filter = 'product'" :class="filter === 'product' ? 'bg-brand-navy text-white shadow-lg' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all">Products</button>
@@ -93,12 +99,13 @@ const blogPosts = await getCollection('blog');
     <!-- Social Proof & Blog -->
     <section class="py-24 2xl:py-32 bg-base-200/50 transition-colors duration-300">
         <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
-            <div class="flex justify-between items-end mb-16 2xl:mb-24">
-                <div class="max-w-2xl 2xl:max-w-4xl">
-                    <h2 class="text-4xl md:text-5xl 2xl:text-7xl font-serif font-bold text-brand-navy dark:text-white uppercase tracking-tight mb-6">The <span class="text-brand-sunset italic font-normal lowercase">Journal</span></h2>
-                    <p class="text-lg 2xl:text-2xl font-light text-base-content/70">Insights on Miami's evolving visual landscape, technical deep-dives, and behind-the-scenes at our most complex shoots.</p>
-                </div>
-                <a href="#" class="btn btn-ghost border-brand-navy/20 2xl:btn-lg font-bold tracking-widest uppercase text-xs 2xl:text-sm">View All Articles</a>
+            <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+                <SectionHeader 
+                    title="The" 
+                    accent="Journal" 
+                    description="Insights on Miami's evolving visual landscape, technical deep-dives, and behind-the-scenes at our most complex shoots."
+                />
+                <a href="#" class="btn btn-ghost border-brand-navy/20 2xl:btn-lg font-bold tracking-widest uppercase text-xs 2xl:text-sm transform md:-translate-y-12 2xl:-translate-y-16">View All Articles</a>
             </div>
 
             <BlogTeaser posts={blogPosts} />
