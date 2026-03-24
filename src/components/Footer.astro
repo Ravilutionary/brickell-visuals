@@ -1,33 +1,36 @@
 ---
 import { SITE, SOCIALS, FOOTER_LINKS } from '../consts';
+import Container from './Container.astro';
 ---
 <footer class="py-24 2xl:py-32 transition-colors duration-500 bg-base-200 border-t border-base-300 text-base-content pb-24 md:pb-10 2xl:pb-16 mt-auto">
-    <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] grid grid-cols-2 md:grid-cols-4 gap-12 2xl:gap-20">
-        <aside class="col-span-2 md:col-span-1">
-            <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white tracking-tight mb-2 2xl:mb-6">
-                {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">{SITE.name.split(' ')[1]}</span>
-            </div>
-            <p class="font-light 2xl:text-lg leading-relaxed text-base-content/80">© {new Date().getFullYear()} {SITE.name}.<br/>{SITE.tagline}.</p>
-        </aside> 
-        
-        {FOOTER_LINKS.map(col => (
-            <nav class="flex flex-col gap-2 2xl:gap-4">
-                <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">{col.title}</h6> 
-                {col.links.map(link => (
-                    <a href={link.url} class="link link-hover hover:text-brand-sunset font-light 2xl:text-lg">{link.name}</a>
-                ))}
-            </nav> 
-        ))}
+    <Container>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 2xl:gap-20">
+            <aside class="col-span-2 md:col-span-1">
+                <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white tracking-tight mb-2 2xl:mb-6">
+                    {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">{SITE.name.split(' ')[1]}</span>
+                </div>
+                <p class="font-light 2xl:text-lg leading-relaxed text-base-content/80">© {new Date().getFullYear()} {SITE.name}.<br/>{SITE.tagline}.</p>
+            </aside> 
+            
+            {FOOTER_LINKS.map(col => (
+                <nav class="flex flex-col gap-2 2xl:gap-4">
+                    <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">{col.title}</h6> 
+                    {col.links.map(link => (
+                        <a href={link.url} class="link link-hover hover:text-brand-sunset font-light 2xl:text-lg">{link.name}</a>
+                    ))}
+                </nav> 
+            ))}
 
-        <nav class="flex flex-col gap-2 2xl:gap-4">
-            <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">Social</h6> 
-            <div class="flex gap-4 2xl:gap-6">
-                {SOCIALS.map(social => (
-                    <a href={social.url} aria-label={social.name}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-6 h-6 2xl:w-8 2xl:h-8 hover:text-brand-sunset transition-colors"><path d={social.svgPath}></path></svg>
-                    </a>
-                ))}
-            </div>
-        </nav>
-    </div>
+            <nav class="flex flex-col gap-2 2xl:gap-4">
+                <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">Social</h6> 
+                <div class="flex gap-4 2xl:gap-6">
+                    {SOCIALS.map(social => (
+                        <a href={social.url} aria-label={social.name}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-6 h-6 2xl:w-8 2xl:h-8 hover:text-brand-sunset transition-colors"><path d={social.svgPath}></path></svg>
+                        </a>
+                    ))}
+                </div>
+            </nav>
+        </div>
+    </Container>
 </footer>
