@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Brickell Headshots, Product & Real Estate Photography | Triple-Threat Shoots">
+	<Navbar />
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1533659828870-95ee305cee3e?auto=format&fit=crop&w=2400&q=80" alt="Miami Skyline Background - Brickell Triple Threat Photographer" fetchpriority="high" class="w-full h-full object-cover object-center opacity-40" />
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-base-100/20 to-base-100"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl lg:max-w-5xl 2xl:max-w-[1600px] mx-auto mt-16 2xl:mt-24">
+            <h1 class="text-5xl md:text-[4.5rem] lg:text-[6rem] 2xl:text-[8rem] font-serif font-bold mb-6 2xl:mb-10 leading-tight text-brand-navy dark:text-white drop-shadow-md transition-all duration-300 tracking-tight">
+                Brickell Triple-Threat <br/><span class="text-brand-sunset italic font-normal">Photography</span>
+            </h1>
+            <p class="text-xl md:text-2xl 2xl:text-3xl mb-12 2xl:mb-16 font-light text-base-content/90 max-w-2xl lg:max-w-3xl 2xl:max-w-5xl mx-auto drop-shadow-sm transition-all duration-300 tracking-wide">
+                Fast 24hr delivery on portrait, product, and real estate photography in Miami. Save 40% when bundled in one session.
+            </p>
+            <a href="#portfolio" class="font-serif italic text-xl 2xl:text-2xl text-white hover:text-brand-sunset transition-colors border-b border-brand-sunset pb-1">View the Portfolio</a>
+        </div>
+    </header>
+
+    <!-- Signature Services -->
+    <section class="py-24 2xl:py-32 transition-colors duration-300 bg-base-100">
+        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+            <div class="text-center mb-20 2xl:mb-32">
+                <h2 class="text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-brand-navy dark:text-white mb-4 2xl:mb-6">Signature Services</h2>
+                <p class="text-lg 2xl:text-2xl font-light text-base-content/70">Curated collections for your visual identity.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 2xl:gap-16">
+                <template x-for="service in services" :key="service.title">
+                    <div :id="service.id" class="group cursor-pointer scroll-mt-32" :class="service.highlight ? 'md:-mt-8' : ''">
+                        <div class="overflow-hidden rounded-sm mb-6 aspect-[3/4] relative" :class="service.highlight ? 'shadow-2xl shadow-brand-sunset/10' : ''">
+                            <div x-show="service.highlight" class="absolute top-4 right-4 z-10 bg-brand-sunset/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-1 uppercase tracking-widest">Most Booked</div>
+                            <img :src="service.img" :alt="service.alt" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <div class="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/20 transition-colors duration-500"></div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white mb-2" x-text="service.title"></h3>
+                            <p class="text-base-content/70 mb-4 font-light 2xl:text-lg" x-text="service.desc"></p>
+                            <p class="text-xl font-serif text-brand-sunset italic" x-text="service.price"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="text-center mt-16">
+                 <a href="#book" class="btn btn-outline rounded-none hover:bg-brand-navy hover:text-white hover:border-brand-navy font-medium tracking-widest uppercase text-xs 2xl:h-14 2xl:text-sm px-10 transition-colors duration-500">Inquire About Packages</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Gallery -->
+    <section id="portfolio" class="py-24 2xl:py-32 transition-colors duration-300 bg-base-200" aria-label="Portfolio Gallery">
+        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+            <h2 class="text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-brand-navy dark:text-white text-center mb-12 2xl:mb-16">Recent Work</h2>
+            
+            <div class="flex justify-center flex-wrap gap-3 2xl:gap-5 mb-12 2xl:mb-16" role="tablist">
+                <template x-for="btn in filterBtns" :key="btn.val">
+                    <button @click="filter = btn.val" :class="{ 'bg-brand-navy text-white border-brand-navy': filter === btn.val }" class="btn btn-outline rounded-none 2xl:btn-lg font-medium tracking-widest uppercase text-xs transition-colors duration-500" x-text="btn.label" role="tab" :aria-selected="filter === btn.val"></button>
+                </template>
+            </div>
+
+            <div class="columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 gap-4 2xl:gap-6" x-init="$nextTick(() => { if (typeof GLightbox !== 'undefined') { GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true }) } })">
+                <template x-for="img in gallery" :key="img.title">
+                    <div x-show="filter === 'all' || filter === img.cat" x-transition.opacity.duration.500ms class="masonry-item relative group overflow-hidden cursor-pointer bg-base-100 mb-4 2xl:mb-6">
+                        <a :href="img.lg" class="glightbox" data-gallery="portfolio" :data-title="img.title">
+                            <img :src="img.sm" :alt="img.alt" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            <div class="absolute inset-0 bg-white/90 dark:bg-brand-navy/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 2xl:p-8 text-center">
+                                <span class="text-brand-sunset font-bold tracking-widest uppercase text-xs 2xl:text-sm mb-2" x-text="img.catLabel"></span>
+                                <span class="text-brand-navy dark:text-white font-serif text-xl 2xl:text-3xl" x-text="img.title"></span>
+                            </div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Portal -->
+    <section class="py-24 2xl:py-32 transition-colors duration-300 bg-base-100 border-y border-base-300" aria-labelledby="client-portal-title">
+        <div class="container mx-auto px-6 2xl:px-12 max-w-4xl text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-brand-sunset mb-6 2xl:w-16 2xl:h-16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <h2 id="client-portal-title" class="text-3xl md:text-5xl 2xl:text-6xl font-serif font-bold text-brand-navy dark:text-white mb-6">Client Collections</h2>
+            <p class="text-lg 2xl:text-xl font-light text-base-content/70 mb-10">Access your private, high-resolution gallery to view, download, and order prints from your session.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-6 justify-center max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Redirecting to secure gallery...');">
+                <input id="collection-password" type="password" placeholder="Enter Collection Password" class="w-full bg-transparent border-0 border-b border-base-content/30 focus:border-brand-sunset outline-none focus:ring-0 font-light text-center sm:text-left px-2 py-3 transition-colors placeholder:text-base-content/50" required />
+                <button type="submit" class="btn bg-brand-navy dark:bg-white text-white dark:text-brand-navy hover:bg-brand-sunset dark:hover:bg-brand-sunset dark:hover:text-white border-none rounded-none px-10 font-medium tracking-widest uppercase text-xs transition-colors duration-500">Access</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 2xl:py-32 transition-colors duration-300 bg-brand-navy text-white relative overflow-hidden" aria-label="Testimonials">
+        <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand-sunset/20 blur-3xl"></div>
+        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] relative z-10">
+            <h2 class="text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-center mb-16 2xl:mb-24 text-white">Client Experiences</h2>
+            <div class="carousel w-full max-w-4xl 2xl:max-w-6xl mx-auto rounded-box shadow-2xl bg-base-100/10 backdrop-blur-sm border border-white/10">
+                <template x-for="(t, index) in testimonials" :key="t.id">
+                    <div :id="'slide' + t.id" class="carousel-item relative w-full p-8 md:p-16 2xl:p-24 flex flex-col items-center text-center">
+                        <div class="text-brand-sunset font-serif text-6xl 2xl:text-8xl mb-4 2xl:mb-8" aria-hidden="true">"</div>
+                        <p class="text-xl md:text-2xl 2xl:text-4xl 2xl:leading-relaxed font-serif italic mb-8 2xl:mb-12" x-text="t.quote"></p>
+                        <div class="flex items-center gap-4 2xl:gap-6">
+                            <div class="avatar"><div class="w-12 2xl:w-20 rounded-full ring ring-brand-sunset ring-offset-base-100 ring-offset-2"><img :src="t.img" :alt="t.name" loading="lazy" /></div></div>
+                            <div class="text-left">
+                                <h4 class="font-bold 2xl:text-xl" x-text="t.name"></h4>
+                                <p class="text-sm 2xl:text-lg font-light text-white/70" x-text="t.role"></p>
+                            </div>
+                        </div>
+                        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a :href="'#slide' + (index === 0 ? testimonials.length : index)" class="btn btn-circle btn-sm md:btn-md 2xl:btn-lg btn-ghost text-white" aria-label="Previous Slide">❮</a> 
+                            <a :href="'#slide' + (index === testimonials.length - 1 ? 1 : index + 2)" class="btn btn-circle btn-sm md:btn-md 2xl:btn-lg btn-ghost text-white" aria-label="Next Slide">❯</a>
+                        </div>
+                    </div> 
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal -->
+    <section class="py-24 2xl:py-32 transition-colors duration-300 bg-base-100" aria-label="Journal Highlights">
+        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+            <div class="flex justify-between items-end mb-12 2xl:mb-16">
+                <div>
+                    <h2 class="text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-brand-navy dark:text-white mb-2 2xl:mb-4">Journal</h2>
+                    <p class="text-lg 2xl:text-2xl font-light text-base-content/70">Visual stories, tips, and recent commissions.</p>
+                </div>
+                <a href="#" class="btn btn-ghost hidden md:flex hover:text-brand-sunset tracking-widest uppercase text-xs 2xl:text-sm">Read the Journal →</a>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 2xl:gap-16">
+                <template x-for="post in blogPosts" :key="post.title">
+                    <a href="#" :class="post.hideMobile ? 'sm:hidden md:flex' : ''" class="group flex flex-col">
+                        <figure class="overflow-hidden h-64 2xl:h-96 mb-6 relative">
+                            <img :src="post.img" :alt="post.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                        </figure>
+                        <div>
+                            <div class="text-xs 2xl:text-sm font-bold text-brand-sunset mb-3 uppercase tracking-widest" x-text="post.cat"></div>
+                            <h3 class="font-serif text-2xl 2xl:text-3xl text-brand-navy dark:text-white group-hover:text-brand-sunset transition-colors mb-3" x-text="post.title"></h3>
+                            <p class="text-sm 2xl:text-lg text-base-content/70 font-light" x-text="post.desc"></p>
+                        </div>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="book" class="py-24 2xl:py-32 transition-colors duration-300 bg-brand-navy text-white relative overflow-hidden" aria-labelledby="booking-title">
+        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] flex flex-col md:flex-row gap-12 2xl:gap-24 items-center">
+            <div class="flex-1 text-center md:text-left">
+                <h2 id="booking-title" class="text-4xl md:text-5xl 2xl:text-7xl font-serif font-bold text-white mb-6 2xl:mb-10">Ready to upgrade your visuals?</h2>
+                <p class="mb-8 2xl:mb-12 text-lg 2xl:text-2xl font-light text-white/80 2xl:leading-relaxed">Book a slot today. No commitments, just a quick consultation to map out your next project.</p>
+                <div class="flex flex-col gap-4 2xl:gap-8">
+                    <div class="flex items-center gap-3 2xl:gap-5 justify-center md:justify-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 2xl:h-10 2xl:w-10 text-brand-sunset" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        <span class="2xl:text-2xl">hello@brickellvisuals.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 w-full max-w-md 2xl:max-w-2xl bg-base-100 p-8 md:p-12 2xl:p-16 rounded-sm shadow-2xl text-base-content">
+                <h3 class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white text-center mb-8 2xl:mb-10">Request Availability</h3>
+                <form class="space-y-6 2xl:space-y-8" onsubmit="event.preventDefault(); alert('In a real app, this would send an email or ping Netlify Forms!');">
+                    <input type="text" placeholder="Full Name" class="block w-full bg-transparent border-0 border-b border-base-content/30 focus:border-brand-sunset outline-none focus:ring-0 py-3 2xl:py-4 font-light 2xl:text-lg transition-colors placeholder:text-base-content/50" required />
+                    <input type="email" placeholder="Email Address" class="block w-full bg-transparent border-0 border-b border-base-content/30 focus:border-brand-sunset outline-none focus:ring-0 py-3 2xl:py-4 font-light 2xl:text-lg transition-colors placeholder:text-base-content/50" required />
+                    <button type="submit" class="w-full bg-brand-sunset hover:bg-[#a68444] text-white py-4 2xl:py-5 font-medium tracking-widest uppercase text-xs 2xl:text-sm transition-colors duration-500 mt-4">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+
+    <!-- Alpine Data Model -->
+    <script is:inline>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('portfolioData', () => ({
+                dark: true,
+                scrolled: false,
+                filter: 'all',
+                
+                filterBtns: [
+                    { label: 'All', val: 'all' },
+                    { label: 'Portraits', val: 'portrait' },
+                    { label: 'Products', val: 'product' },
+                    { label: 'Real Estate', val: 'realestate' }
+                ],
+
+                services: [
+                    { id: 'brickell-headshots', title: 'Brickell Corporate Headshots', price: 'From $299', desc: 'Editorial headshots & LinkedIn lifestyle portraits.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80', highlight: false, alt: 'Brickell corporate headshot against skyline' },
+                    { id: 'brickell-product', title: 'Brickell Product Photography', price: 'From $499', desc: 'E-comm ready deliverables & luxury staging.', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80', highlight: true, alt: 'Luxury product photography Miami' },
+                    { id: 'brickell-realestate', title: 'Brickell Real Estate Photography', price: 'From $999', desc: 'Luxury condo interiors & MLS twilight composites.', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', highlight: false, alt: 'Brickell luxury real estate photos' }
+                ],
+
+                gallery: [
+                    { cat: 'portrait', catLabel: 'Portrait', title: 'Executive Headshot', sm: 'https://images.unsplash.com/photo-1533282960533-51328aa26ee8?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1533282960533-51328aa26ee8?auto=format&fit=crop&w=1600&q=80', alt: 'Miami Brickell portraits' },
+                    { cat: 'product', catLabel: 'Product', title: 'Luxury Timepiece', sm: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1600&q=80', alt: 'Brickell product photographer' },
+                    { cat: 'realestate', catLabel: 'Real Estate', title: 'Condo Interior', sm: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80', alt: 'Miami condo photographer' },
+                    { cat: 'portrait', catLabel: 'Portrait', title: 'Lifestyle Shoot', sm: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80', alt: 'Brickell headshots' },
+                    { cat: 'realestate', catLabel: 'Real Estate', title: 'Twilight Exterior', sm: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80', alt: 'Brickell real estate photography' },
+                    { cat: 'product', catLabel: 'Product', title: 'E-comm Staging', sm: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80', lg: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1600&q=80', alt: 'ecommerce product photos Brickell' }
+                ],
+
+                testimonials: [
+                    { id: 1, quote: "The editorial approach completely elevated our brand. The images we shot in the Design District are currently leading our national ad campaign.", name: "David Chen", role: "Creative Director, Chronos", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" },
+                    { id: 2, quote: "Captured the true scale and luxury of our Brickell City Centre penthouse listing. We had a full-asking offer within 48 hours of updating the MLS.", name: "Sarah Jenkins", role: "Principal Broker, ONE Sotheby's", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" },
+                    { id: 3, quote: "Professional, efficient, and incredibly skilled with natural light. The corporate headshots look polished without feeling stiff or overly staged.", name: "Marcus Thorne", role: "Partner, Thorne & Associates", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+                ],
+
+                blogPosts: [
+                    { cat: "Gear", title: "Top Brickell Backdrops for 2026", desc: "Skip the clichés. Here are the 5 hidden spots in Brickell that deliver stunning, modern portrait aesthetics.", img: "https://images.unsplash.com/photo-1503891450244-1f591465c6f1?auto=format&fit=crop&w=800&q=80", hideMobile: false },
+                    { cat: "E-Commerce", title: "Lighting Luxury Watches", desc: "A deep dive into managing reflections and creating dramatic macro contrast for high-end timepieces.", img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=800&q=80", hideMobile: false },
+                    { cat: "Real Estate", title: "The Twilight Advantage", desc: "Why booking a dusk session can increase your luxury condo listing engagement by over 45%.", img: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80", hideMobile: true }
+                ],
+
+                footerLinks: [
+                    { title: 'Services', links: [
+                        { name: 'Portraits', url: '#brickell-headshots' },
+                        { name: 'Product Photography', url: '#brickell-product' }, 
+                        { name: 'Real Estate', url: '#brickell-realestate' }
+                    ]},
+                    { title: 'Company', links: [
+                        { name: 'About', url: '#' }, 
+                        { name: 'Contact', url: '#book' }, 
+                        { name: 'Journal', url: '#' }
+                    ]}
+                ]
+            }));
+        });
+    </script>
+</Layout>

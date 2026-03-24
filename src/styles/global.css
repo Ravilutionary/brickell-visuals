@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-brand-navy: #0A1128;
+  --color-brand-sunset: #C5A059;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  :root {
+    --brand-navy: #0A1128;
+    --brand-sunset: #C5A059;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-brand-navy { color: var(--brand-navy); }
+  .text-brand-sunset { color: var(--brand-sunset); }
+  .bg-brand-navy { background-color: var(--brand-navy); }
+  .bg-brand-sunset { background-color: var(--brand-sunset); }
+}

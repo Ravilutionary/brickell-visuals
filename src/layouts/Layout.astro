@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+    description?: string;
+}
+
+const { title, description = "Fast 24hr Brickell portrait, product, real estate photography. Save 40% with bundled urban skyline sessions. Book now." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<!-- LocalBusiness Schema -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "LocalBusiness",
+		  "name": "Brickell Triple-Threat Photography",
+		  "image": "https://images.unsplash.com/photo-1533659828870-95ee305cee3e?auto=format&fit=crop&w=2400&q=80",
+		  "@id": "https://brickellvisuals.com",
+		  "url": "https://brickellvisuals.com",
+		  "telephone": "+1-305-555-0199",
+		  "address": {
+			"@type": "PostalAddress",
+			"streetAddress": "Brickell Ave",
+			"addressLocality": "Miami",
+			"addressRegion": "FL",
+			"postalCode": "33131",
+			"addressCountry": "US"
+		  },
+		  "priceRange": "$$$",
+		  "sameAs": [
+			"https://instagram.com/brickellvisuals",
+			"https://linkedin.com/company/brickellvisuals"
+		  ]
+		}
+		</script>
+
+		<!-- Google Fonts (Optimized) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+		
+		<!-- GLightbox -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+		<script is:inline src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+		<style is:global>
+			/* Custom Masonry Spacing */
+			.masonry-item { margin-bottom: 1.5rem; break-inside: avoid; }
+			@media (min-width: 1536px) { .masonry-item { margin-bottom: 2rem; } }
+
+			/* Premium Typography & Variable Overrides */
+			:root {
+				--font-sans: 'Inter', sans-serif;
+				--font-serif: 'Playfair Display', serif;
+			}
+		</style>
+	</head>
+	<body 
+		x-data="portfolioData()" 
+		@scroll.window="scrolled = (window.pageYOffset > 50)" 
+		:data-theme="dark ? 'dark' : 'light'" 
+		:class="dark ? 'dark' : ''" 
+		class="font-sans antialiased text-base-content bg-base-100 transition-colors duration-300"
+	>
+		<slot />
+	</body>
+</html>
