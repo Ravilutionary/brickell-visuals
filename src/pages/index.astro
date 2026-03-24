@@ -11,10 +11,11 @@ import TestimonialCarousel from '../components/TestimonialCarousel.astro';
 import BlogTeaser from '../components/BlogTeaser.astro';
 import BookingForm from '../components/BookingForm.astro';
 
+import Container from '../components/Container.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 
 // Fetch Data from Collections
-const services = await getCollection('services'); // Already an array of entries
+const services = await getCollection('services');
 const gallery = (await getCollection('gallery')).map(e => e.data);
 const testimonials = (await getCollection('testimonials')).map(e => e.data);
 const blogPosts = await getCollection('blog');
@@ -32,7 +33,7 @@ const blogPosts = await getCollection('blog');
 
     <!-- Signature Services -->
     <section id="services" class="py-24 2xl:py-32 transition-colors duration-500 border-b border-base-300">
-        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+        <Container>
             <div class="flex flex-col md:flex-row justify-between items-end gap-8 overflow-visible">
                 <SectionHeader 
                     title="Signature" 
@@ -49,7 +50,7 @@ const blogPosts = await getCollection('blog');
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 2xl:gap-20">
                 {services.map(s => <ServiceCard service={s.data} />)}
             </div>
-        </div>
+        </Container>
     </section>
 
     <!-- Portfolio Section -->
@@ -63,7 +64,7 @@ const blogPosts = await getCollection('blog');
             return this.filter === 'all' ? this.galleryItems : this.galleryItems.filter(i => i.cat === this.filter);
         }
     }" data-items={JSON.stringify(gallery)}>
-        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+        <Container>
             <div class="flex flex-col md:flex-row justify-between items-center mb-0 gap-8">
                 <SectionHeader 
                     title="Brickell" 
@@ -79,7 +80,7 @@ const blogPosts = await getCollection('blog');
             </div>
 
             <GalleryGrid items={gallery} />
-        </div>
+        </Container>
     </section>
 
     <!-- Testimonials -->
@@ -98,7 +99,7 @@ const blogPosts = await getCollection('blog');
 
     <!-- Social Proof & Blog -->
     <section class="py-24 2xl:py-32 bg-base-200/50 transition-colors duration-300">
-        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
+        <Container>
             <div class="flex flex-col md:flex-row justify-between items-end gap-8">
                 <SectionHeader 
                     title="The" 
@@ -109,7 +110,7 @@ const blogPosts = await getCollection('blog');
             </div>
 
             <BlogTeaser posts={blogPosts} />
-        </div>
+        </Container>
     </section>
 
     <!-- Final CTA -->
@@ -118,7 +119,7 @@ const blogPosts = await getCollection('blog');
             <img src="https://images.unsplash.com/photo-1533282960533-51328aa26ee8?auto=format&fit=crop&w=2600&q=80" alt="Background" class="w-full h-full object-cover">
         </div>
         
-        <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] relative z-10">
+        <Container>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div>
                     <h2 class="text-5xl md:text-7xl 2xl:text-9xl font-serif text-white font-bold mb-10 2xl:mb-16 leading-tight">Elevate <br/>Your Visual <br/><span class="text-brand-sunset italic font-normal">Standard</span></h2>
@@ -137,7 +138,7 @@ const blogPosts = await getCollection('blog');
 
                 <BookingForm />
             </div>
-        </div>
+        </Container>
     </section>
 
     <Footer />
