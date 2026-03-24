@@ -6,11 +6,20 @@ interface Props {
 	image: string;
 }
 
+import { Image } from 'astro:assets';
+
 const { title, tagline, description, image } = Astro.props;
 ---
 <header class="relative h-screen flex items-center justify-center overflow-hidden bg-brand-navy">
     <div class="absolute inset-0 z-0">
-        <img src={image} alt={`Miami Skyline Background - ${title}`} fetchpriority="high" class="w-full h-full object-cover object-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000" />
+        <Image 
+            src={image} 
+            alt={`Miami Skyline Background - ${title}`} 
+            width={1920} 
+            height={1080} 
+            loading="eager"
+            class="w-full h-full object-cover object-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000" 
+        />
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg-color/40 to-bg-color transition-colors duration-500"></div>
     </div>
     <div class="relative z-10 text-center px-4 max-w-4xl lg:max-w-5xl 2xl:max-w-[1600px] mx-auto mt-16 2xl:mt-24">

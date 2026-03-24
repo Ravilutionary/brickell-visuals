@@ -17,17 +17,22 @@ const { title, description = "Fast 24hr Brickell portrait, product, real estate 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<!-- SEO -->
+		<!-- SEO & Social Meta -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://images.unsplash.com/photo-1503891450244-1f591465c6f1?auto=format&fit=crop&w=1200&q=80" />
+		<meta name="twitter:card" content="summary_large_image" />
 		
-		<!-- LocalBusiness Schema -->
+		<!-- Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
 		  "@type": "LocalBusiness",
 		  "name": "Brickell Triple-Threat Photography",
-		  "image": "https://images.unsplash.com/photo-1533659828870-95ee305cee3e?auto=format&fit=crop&w=2400&q=80",
+		  "image": "https://images.unsplash.com/photo-1503891450244-1f591465c6f1?auto=format&fit=crop&w=1200&q=80",
 		  "@id": "https://brickellvisuals.com",
 		  "url": "https://brickellvisuals.com",
 		  "telephone": "+1-305-555-0199",
@@ -46,34 +51,16 @@ const { title, description = "Fast 24hr Brickell portrait, product, real estate 
 		  ]
 		}
 		</script>
-
-		<!-- Google Fonts (Optimized) -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 		
 		<!-- GLightbox -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-		<script is:inline src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-
-		<style is:global>
-			/* Custom Masonry Spacing */
-			.masonry-item { margin-bottom: 1.5rem; break-inside: avoid; }
-			@media (min-width: 1536px) { .masonry-item { margin-bottom: 2rem; } }
-
-			/* Premium Typography & Variable Overrides */
-			:root {
-				--font-sans: 'Inter', sans-serif;
-				--font-serif: 'Playfair Display', serif;
-			}
-		</style>
 	</head>
 	<body 
-		x-data="portfolioData()" 
+		x-data="{ scrolled: false, dark: false }" 
 		@scroll.window="scrolled = (window.pageYOffset > 50)" 
 		:data-theme="dark ? 'dark' : 'light'" 
 		:class="dark ? 'dark' : ''" 
-		class="font-sans antialiased text-base-content bg-base-100 transition-colors duration-300"
+		class="font-sans antialiased selection:bg-brand-sunset/30 transition-colors duration-500"
 	>
 		<slot />
 	</body>
