@@ -2,23 +2,59 @@
 @plugin "daisyui";
 
 @theme {
-  --color-brand-navy: #0A1128;
-  --color-brand-sunset: #C5A059;
-  --font-serif: "Playfair Display", serif;
-  --font-sans: "Inter", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --color-brand-navy: #0a1128;
+  --color-brand-sunset: #c5a059;
 }
 
-@layer base {
-  :root {
-    --brand-navy: #0A1128;
-    --brand-sunset: #C5A059;
-  }
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair-display.woff2') format('woff2');
+  font-weight: 400 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, blockquote {
+  font-family: var(--font-serif);
 }
 
 /* Custom Utilities */
-@layer utilities {
-  .text-brand-navy { color: var(--brand-navy); }
-  .text-brand-sunset { color: var(--brand-sunset); }
-  .bg-brand-navy { background-color: var(--brand-navy); }
-  .bg-brand-sunset { background-color: var(--brand-sunset); }
+.tracking-ultra {
+  letter-spacing: 0.2em;
 }
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }

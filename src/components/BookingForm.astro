@@ -1,0 +1,31 @@
+---
+---
+<div class="card bg-base-100 shadow-2xl border border-base-300 rounded-sm">
+    <div class="card-body p-8 2xl:p-12">
+        <h2 class="card-title text-3xl 2xl:text-4xl font-serif mb-6 2xl:mb-8">Book Your Session</h2>
+        <form class="space-y-6 2xl:space-y-8" @submit.prevent="alert('Thank you! We will be in touch within 2 hours.')">
+            <div class="form-control">
+                <label class="label"><span class="label-text uppercase tracking-widest text-xs 2xl:text-sm font-bold">Full Name</span></label>
+                <input type="text" placeholder="John Doe" class="input input-bordered rounded-sm focus:border-brand-sunset 2xl:input-lg" required />
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text uppercase tracking-widest text-xs 2xl:text-sm font-bold">Email Address</span></label>
+                <input type="email" placeholder="john@example.com" class="input input-bordered rounded-sm focus:border-brand-sunset 2xl:input-lg" required />
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text uppercase tracking-widest text-xs 2xl:text-sm font-bold">Service Category</span></label>
+                <select class="select select-bordered rounded-sm focus:border-brand-sunset 2xl:select-lg">
+                    <option>Corporate Headshots</option>
+                    <option>Product Photography</option>
+                    <option>Real Estate / Interior</option>
+                    <option>The Triple-Threat Bundle</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text uppercase tracking-widest text-xs 2xl:text-sm font-bold">Project Details</span></label>
+                <textarea class="textarea textarea-bordered h-24 2xl:h-32 rounded-sm focus:border-brand-sunset 2xl:textarea-lg" placeholder="Tell us about your shoot..."></textarea>
+            </div>
+            <button type="submit" class="btn bg-brand-navy hover:bg-brand-sunset text-white border-none w-full rounded-sm 2xl:btn-lg py-4 2xl:py-6 tracking-[0.2em] font-bold transition-all duration-500 uppercase h-auto">Reserve Session</button>
+        </form>
+    </div>
+</div>

@@ -1,21 +1,33 @@
 ---
+import { SITE, SOCIALS, FOOTER_LINKS } from '../consts';
 ---
 <footer class="py-24 2xl:py-32 transition-colors duration-300 !py-10 2xl:!py-16 bg-base-300 text-base-content pb-24 md:pb-10 2xl:pb-16">
     <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] grid grid-cols-2 md:grid-cols-4 gap-10">
         <aside class="col-span-2 md:col-span-1">
             <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white tracking-tight mb-2 2xl:mb-4">
-                BRICKELL<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">Visuals</span>
+                {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">{SITE.name.split(' ')[1]}</span>
             </div>
-            <p class="font-light 2xl:text-lg leading-relaxed">© 2026 Brickell Visuals.<br/>Premium photography in Miami, FL.</p>
+            <p class="font-light 2xl:text-lg leading-relaxed">© {new Date().getFullYear()} {SITE.name}.<br/>{SITE.tagline}.</p>
         </aside> 
         
-        <template x-for="col in footerLinks" :key="col.title">
+        {FOOTER_LINKS.map(col => (
             <nav class="flex flex-col gap-2 2xl:gap-4">
-                <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2" x-text="col.title"></h6> 
-                <template x-for="link in col.links" :key="link.name">
-                    <a :href="link.url" class="link link-hover hover:text-brand-sunset font-light 2xl:text-lg" x-text="link.name"></a>
-                </template>
+                <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">{col.title}</h6> 
+                {col.links.map(link => (
+                    <a href={link.url} class="link link-hover hover:text-brand-sunset font-light 2xl:text-lg">{link.name}</a>
+                ))}
             </nav> 
-        </template>
+        ))}
+
+        <nav class="flex flex-col gap-2 2xl:gap-4">
+            <h6 class="footer-title text-brand-navy dark:text-white 2xl:text-lg mb-2">Social</h6> 
+            <div class="flex gap-4 2xl:gap-6">
+                {SOCIALS.map(social => (
+                    <a href={social.url} aria-label={social.name}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current w-6 h-6 2xl:w-8 2xl:h-8 hover:text-brand-sunset transition-colors"><path d={social.svgPath}></path></svg>
+                    </a>
+                ))}
+            </div>
+        </nav>
     </div>
 </footer>
