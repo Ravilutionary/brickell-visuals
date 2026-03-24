@@ -1,43 +1,27 @@
-# Astro Starter Kit: Minimal
+# 📸 Brickell Visuals | Premium Miami Photography
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A high-performance, model portfolio for photographers. Built with Astro v5, Tailwind v4, and Alpine.js. Designed for the "Design District Editorial" standard.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Architectural Gold Standard
+This project is engineered for speed, maintainability, and "Digital Sovereignty":
+-   **Astro v5 Content Layer**: Data-driven architecture (Services, Gallery, Testimonials, Blog) managed via type-safe Content Collections.
+-   **Atomic & DRY Component System**: Reusable components (`SectionHeader`, `Container`, `ServiceCard`, `GalleryGrid`) ensuring a single source of truth for design patterns.
+-   **Miami Visual Themes**: 🏖️ **Beach Vibes** (Light) and 🌃 **Night Life** (Dark) themes with perfectly audited **WCAG 2.1 AA** contrast compliance.
+-   **Performance-First**: Self-hosted typography, localized assets, and optimized remote image delivery via Astro's `<Image />` component.
 
-## 🚀 Project Structure
+## 🛠️ Tech Stack
+-   **Core**: [Astro 5+](https://astro.build)
+-   **Styling**: [Tailwind CSS v4](https://tailwindcss.com) + [DaisyUI 5](https://daisyui.com)
+-   **Interactivity**: [Alpine.js](https://alpinejs.dev)
+-   **Assets**: Self-hosted Local Fonts & CDNs for optimized delivery.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🧞 Maintenance
+This portfolio is 100% data-driven.
+-   **Branding**: Update `src/consts.ts` to change names, colors, and site-wide metadata.
+-   **Content**: Edit JSON/Markdown files in `src/content/` to update services, gallery items, or blog posts.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## ⚡ Deployment
+Zero-config deployment for Netlify. Simply link your repository for automatic CI/CD on every push.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+*Built with ❤️ in Brickell, Miami.*
