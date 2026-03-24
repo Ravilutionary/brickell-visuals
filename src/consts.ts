@@ -35,14 +35,16 @@ export const SOCIALS = [
   },
 ];
 
+export const NAV_LINKS = [
+  { name: 'Portraits', url: '#brickell-headshots' },
+  { name: 'Products', url: '#brickell-product' },
+  { name: 'Real Estate', url: '#brickell-realestate' },
+];
+
 export const FOOTER_LINKS = [
   {
     title: 'Services',
-    links: [
-      { name: 'Portraits', url: '#brickell-headshots' },
-      { name: 'Product Photography', url: '#brickell-product' },
-      { name: 'Real Estate', url: '#brickell-realestate' },
-    ],
+    links: NAV_LINKS,
   },
   {
     title: 'Company',

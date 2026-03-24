@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, NAV_LINKS } from '../consts';
 ---
 <nav class="fixed w-full z-50 transition-all duration-500 border-b" :class="scrolled ? 'glass-premium shadow-xl py-2 border-base-300' : 'py-4 md:py-6 border-transparent bg-transparent'" aria-label="Main Navigation">
     <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] flex justify-between items-center">
@@ -8,9 +8,9 @@ import { SITE } from '../consts';
         </div>
         
         <div class="hidden lg:flex items-center gap-8 font-bold tracking-widest text-[10px] 2xl:text-xs uppercase">
-            <a href="#brickell-headshots" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Portraits</a>
-            <a href="#brickell-product" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Products</a>
-            <a href="#brickell-realestate" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Real Estate</a>
+            {NAV_LINKS.map(link => (
+                <a href={link.url} class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">{link.name}</a>
+            ))}
         </div>
 
         <div class="flex items-center gap-2 sm:gap-4 2xl:gap-6">
