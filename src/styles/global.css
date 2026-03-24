@@ -4,8 +4,11 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
-  --color-brand-navy: #0a1128;
-  --color-brand-sunset: #c5a059;
+  
+  /* Shared Brand Tokens */
+  --color-brand-navy: #0A1128;
+  --color-brand-sunset: #C5A059;
+  --color-brand-sand: #FAF9F6;
 }
 
 @font-face {
@@ -24,10 +27,32 @@
   font-style: normal;
 }
 
+/* Custom Theme Overrides for Beach Vibes (Light) and Night Life (Dark) */
+:root {
+  /* Beach Vibes (Light) */
+  --bg-color: var(--color-brand-sand);
+  --text-color: var(--color-brand-navy);
+  --accent-color: #8B6514; /* Darker sunset for a11y contrast on sand */
+  --card-bg: #FFFFFF;
+  --border-color: #E5E1DA;
+}
+
+[data-theme='dark'] {
+  /* Night Life (Dark) */
+  --bg-color: #05070A;
+  --text-color: #FFFFFF;
+  --accent-color: var(--color-brand-sunset);
+  --card-bg: #0A1128;
+  --border-color: #1A1F35;
+}
+
 /* Base Styles */
 body {
   font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 h1, h2, h3, h4, blockquote {
@@ -37,6 +62,18 @@ h1, h2, h3, h4, blockquote {
 /* Custom Utilities */
 .tracking-ultra {
   letter-spacing: 0.2em;
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme='dark'] .glass-premium {
+  background: rgba(10, 17, 40, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Animations */

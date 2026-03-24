@@ -1,24 +1,24 @@
 ---
 import { SITE } from '../consts';
 ---
-<nav class="fixed w-full z-50 bg-base-100/90 backdrop-blur-md border-b border-base-300 transition-all duration-500" :class="scrolled ? 'py-2' : 'py-4 md:py-6'" aria-label="Main Navigation">
+<nav class="fixed w-full z-50 transition-all duration-500 border-b" :class="scrolled ? 'glass-premium shadow-xl py-2 border-base-300' : 'py-4 md:py-6 border-transparent bg-transparent'" aria-label="Main Navigation">
     <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] flex justify-between items-center">
-        <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-brand-sunset tracking-tight transition-transform duration-500 cursor-pointer" :class="scrolled ? 'scale-90 origin-left' : 'scale-100'" @click="window.scrollTo(0,0)">
-            {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">{SITE.name.split(' ')[1]}</span>
+        <div class="text-2xl 2xl:text-3xl font-serif font-bold tracking-tight transition-transform duration-500 cursor-pointer" :class="[scrolled ? 'scale-90 origin-left text-brand-navy dark:text-white' : 'scale-100 text-white', !scrolled && 'drop-shadow-md']" @click="window.scrollTo(0,0)">
+            {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase ml-1" :class="scrolled ? 'text-base-content' : 'text-white/90 text-shadow-sm'">{SITE.name.split(' ')[1]}</span>
         </div>
         
-        <div class="hidden lg:flex items-center gap-8 font-light tracking-wide text-sm 2xl:text-base">
-            <a href="#brickell-headshots" class="hover:text-brand-sunset transition-colors">Portraits</a>
-            <a href="#brickell-product" class="hover:text-brand-sunset transition-colors">Products</a>
-            <a href="#brickell-realestate" class="hover:text-brand-sunset transition-colors">Real Estate</a>
+        <div class="hidden lg:flex items-center gap-8 font-bold tracking-widest text-[10px] 2xl:text-xs uppercase">
+            <a href="#brickell-headshots" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Portraits</a>
+            <a href="#brickell-product" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Products</a>
+            <a href="#brickell-realestate" class="transition-colors hover:text-brand-sunset" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white drop-shadow-sm'">Real Estate</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-4 2xl:gap-6">
-            <button @click="dark = !dark" class="btn btn-ghost btn-circle 2xl:btn-lg" aria-label="Toggle Dark Mode">
+            <button @click="dark = !dark" class="btn btn-ghost btn-circle 2xl:btn-lg" :class="scrolled ? 'text-brand-navy dark:text-white' : 'text-white'" aria-label="Toggle Dark Mode">
                 <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             </button>
-            <a href="#book" class="btn bg-brand-navy hover:bg-brand-sunset text-white border-none rounded-none px-6 sm:px-8 2xl:px-10 2xl:text-lg font-medium tracking-widest uppercase text-xs transition-colors duration-500">Book Now</a>
+            <a href="#book" class="btn bg-brand-navy dark:bg-brand-sunset hover:bg-brand-sunset dark:hover:bg-brand-navy text-white border-none rounded-none px-6 sm:px-8 2xl:px-10 2xl:text-lg font-bold tracking-widest uppercase text-xs transition-all duration-500 shadow-lg shadow-brand-navy/20">Book Now</a>
         </div>
     </div>
 </nav>

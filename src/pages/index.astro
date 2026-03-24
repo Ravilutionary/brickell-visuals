@@ -29,14 +29,14 @@ const blogPosts = await getCollection('blog');
     />
 
     <!-- Signature Services -->
-    <section id="services" class="py-24 2xl:py-32 bg-base-100 transition-colors duration-300">
+    <section id="services" class="py-24 2xl:py-32 transition-colors duration-500 border-b border-base-300">
         <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 2xl:mb-24 gap-8">
                 <div class="max-w-2xl 2xl:max-w-4xl">
                     <h2 class="text-4xl md:text-5xl 2xl:text-7xl font-serif font-bold text-brand-navy dark:text-white mb-6 uppercase tracking-tight">Signature <span class="text-brand-sunset italic font-normal lowercase">Services</span></h2>
                     <p class="text-lg 2xl:text-2xl font-light text-base-content/70">High-volume deliverables with artisanal precision. Specifically engineered for the Miami market's fast-paced demand.</p>
                 </div>
-                <div class="bg-base-200 border border-base-300 p-6 2xl:p-10 rounded-sm">
+                <div class="bg-base-200/50 border border-base-300 p-6 2xl:p-10 rounded-sm backbone-blur-sm">
                     <p class="text-brand-sunset font-bold uppercase tracking-widest text-xs 2xl:text-base mb-2">Triple-Threat Bundle</p>
                     <p class="text-3xl 2xl:text-5xl font-serif font-bold text-brand-navy dark:text-white mb-2 underline decoration-brand-sunset">Save 40%</p>
                     <p class="text-xs 2xl:text-sm font-light">All 3 categories in one 4hr session.</p>
@@ -50,7 +50,7 @@ const blogPosts = await getCollection('blog');
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 2xl:py-32 bg-base-200 transition-colors duration-300" x-data="{ 
+    <section id="portfolio" class="py-24 2xl:py-32 bg-base-200/30 transition-colors duration-300" x-data="{ 
         filter: 'all', 
         galleryItems: [],
         init() {
@@ -77,7 +77,7 @@ const blogPosts = await getCollection('blog');
     </section>
 
     <!-- Testimonials -->
-    <section class="py-24 2xl:py-48 bg-base-100 transition-colors duration-300 overflow-hidden" x-data="{ 
+    <section class="py-24 2xl:py-48 transition-colors duration-300 overflow-hidden" x-data="{ 
         currentTestimonial: 0,
         testimonials: [],
         init() {
@@ -91,7 +91,7 @@ const blogPosts = await getCollection('blog');
     </section>
 
     <!-- Social Proof & Blog -->
-    <section class="py-24 2xl:py-32 bg-base-200 transition-colors duration-300">
+    <section class="py-24 2xl:py-32 bg-base-200/50 transition-colors duration-300">
         <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px]">
             <div class="flex justify-between items-end mb-16 2xl:mb-24">
                 <div class="max-w-2xl 2xl:max-w-4xl">

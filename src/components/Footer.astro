@@ -1,13 +1,13 @@
 ---
 import { SITE, SOCIALS, FOOTER_LINKS } from '../consts';
 ---
-<footer class="py-24 2xl:py-32 transition-colors duration-300 !py-10 2xl:!py-16 bg-base-300 text-base-content pb-24 md:pb-10 2xl:pb-16">
-    <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] grid grid-cols-2 md:grid-cols-4 gap-10">
+<footer class="py-24 2xl:py-32 transition-colors duration-500 bg-base-200 border-t border-base-300 text-base-content pb-24 md:pb-10 2xl:pb-16 mt-auto">
+    <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] grid grid-cols-2 md:grid-cols-4 gap-12 2xl:gap-20">
         <aside class="col-span-2 md:col-span-1">
-            <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white tracking-tight mb-2 2xl:mb-4">
+            <div class="text-2xl 2xl:text-3xl font-serif font-bold text-brand-navy dark:text-white tracking-tight mb-2 2xl:mb-6">
                 {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase text-base-content ml-1">{SITE.name.split(' ')[1]}</span>
             </div>
-            <p class="font-light 2xl:text-lg leading-relaxed">© {new Date().getFullYear()} {SITE.name}.<br/>{SITE.tagline}.</p>
+            <p class="font-light 2xl:text-lg leading-relaxed text-base-content/80">© {new Date().getFullYear()} {SITE.name}.<br/>{SITE.tagline}.</p>
         </aside> 
         
         {FOOTER_LINKS.map(col => (

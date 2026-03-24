@@ -8,16 +8,16 @@ interface Props {
 
 const { title, tagline, description, image } = Astro.props;
 ---
-<header class="relative h-screen flex items-center justify-center overflow-hidden">
+<header class="relative h-screen flex items-center justify-center overflow-hidden bg-brand-navy">
     <div class="absolute inset-0 z-0">
-        <img src={image} alt={`Miami Skyline Background - ${title}`} fetchpriority="high" class="w-full h-full object-cover object-center opacity-40" />
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-base-100/20 to-base-100"></div>
+        <img src={image} alt={`Miami Skyline Background - ${title}`} fetchpriority="high" class="w-full h-full object-cover object-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000" />
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg-color/40 to-bg-color transition-colors duration-500"></div>
     </div>
     <div class="relative z-10 text-center px-4 max-w-4xl lg:max-w-5xl 2xl:max-w-[1600px] mx-auto mt-16 2xl:mt-24">
-        <h1 class="text-5xl md:text-[4.5rem] lg:text-[6rem] 2xl:text-[8rem] font-serif font-bold mb-6 2xl:mb-10 leading-tight text-brand-navy dark:text-white drop-shadow-md transition-all duration-300 tracking-tight animate-fade-in-up">
-            {title} <br/><span class="text-brand-sunset italic font-normal">{tagline}</span>
+        <h1 class="text-5xl md:text-[4.5rem] lg:text-[6rem] 2xl:text-[8rem] font-serif font-bold mb-6 2xl:mb-10 leading-tight text-white dark:text-white drop-shadow-xl transition-all duration-300 tracking-tight animate-fade-in-up">
+            {title} <br/><span class="text-brand-sunset italic font-normal lowercase">{tagline}</span>
         </h1>
-        <p class="text-xl md:text-2xl 2xl:text-3xl mb-12 2xl:mb-16 font-light text-base-content/90 max-w-2xl lg:max-w-3xl 2xl:max-w-5xl mx-auto drop-shadow-sm transition-all duration-300 tracking-wide animate-fade-in-up stagger-1">
+        <p class="text-xl md:text-2xl 2xl:text-3xl mb-12 2xl:mb-16 font-light text-white/90 max-w-2xl lg:max-w-3xl 2xl:max-w-5xl mx-auto drop-shadow-md transition-all duration-300 tracking-wide animate-fade-in-up stagger-1">
             {description}
         </p>
         <a href="#portfolio" class="font-serif italic text-xl 2xl:text-2xl text-white hover:text-brand-sunset transition-colors border-b border-brand-sunset pb-1 animate-fade-in-up stagger-2">View the Portfolio</a>

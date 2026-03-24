@@ -9,10 +9,10 @@ const { items } = Astro.props;
     <template x-for="item in filteredGallery" :key="item.title">
         <div class="group relative overflow-hidden aspect-[4/5] cursor-crosshair transform transition-all duration-700 hover:z-10 animate-fade-in-up" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
             <img :src="item.sm" :alt="item.alt" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" loading="lazy">
-            <div class="absolute inset-0 bg-brand-navy/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 2xl:p-12">
-                <p class="text-brand-sunset text-xs 2xl:text-sm font-bold uppercase tracking-[0.2em] mb-2" x-text="item.catLabel"></p>
-                <h3 class="text-white text-2xl 2xl:text-4xl font-serif" x-text="item.title"></h3>
-                <a :href="item.lg" class="glightbox mt-4 inline-flex items-center text-white/80 hover:text-white transition-colors 2xl:text-lg">View Full Frame →</a>
+            <div class="absolute inset-0 bg-brand-navy/70 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 2xl:p-12">
+                <p class="text-brand-sunset dark:text-brand-sunset text-xs 2xl:text-sm font-bold uppercase tracking-[0.2em] mb-2" x-text="item.catLabel"></p>
+                <h3 class="text-white text-2xl 2xl:text-4xl font-serif font-bold mb-4" x-text="item.title"></h3>
+                <a :href="item.lg" class="glightbox inline-flex items-center text-white/80 hover:text-white transition-colors 2xl:text-lg border-b border-white/20 pb-1 w-fit">View Full Frame →</a>
             </div>
         </div>
     </template>
