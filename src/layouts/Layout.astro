@@ -17,6 +17,28 @@ const { title, description = "Fast 24hr Brickell portrait, product, real estate 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		
+		<!-- Theme Initialization (Anti-FOUC) -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
+
 		<!-- SEO & Social Meta -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -56,11 +78,24 @@ const { title, description = "Fast 24hr Brickell portrait, product, real estate 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 	</head>
 	<body 
-		x-data="{ scrolled: false, dark: false }" 
+		x-data="{ 
+			scrolled: false, 
+			dark: document.documentElement.classList.contains('dark'),
+			toggleTheme() {
+				this.dark = !this.dark;
+				if (this.dark) {
+					document.documentElement.classList.add('dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+					localStorage.setItem('theme', 'dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+					document.documentElement.setAttribute('data-theme', 'light');
+					localStorage.setItem('theme', 'light');
+				}
+			}
+		}" 
 		@scroll.window="scrolled = (window.pageYOffset > 50)" 
-		:data-theme="dark ? 'dark' : 'light'" 
-		:class="dark ? 'dark' : ''" 
-		class="font-sans antialiased selection:bg-brand-sunset/30 transition-colors duration-500"
+		class="font-sans antialiased selection:bg-brand-sunset/30 transition-colors duration-500 bg-brand-sand dark:bg-[#05070A]"
 	>
 		<slot />
 	</body>
