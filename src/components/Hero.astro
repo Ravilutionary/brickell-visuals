@@ -7,10 +7,11 @@ interface Props {
 }
 
 import { Image } from 'astro:assets';
+import Button from './Button.astro';
 
 const { title, tagline, description, image } = Astro.props;
 ---
-<header class="relative h-screen flex items-center justify-center overflow-hidden bg-brand-navy">
+<header class="relative h-screen flex items-center justify-center overflow-hidden bg-brand-navy group">
     <div class="absolute inset-0 z-0">
         <Image 
             src={image} 
@@ -29,6 +30,6 @@ const { title, tagline, description, image } = Astro.props;
         <p class="text-xl md:text-2xl 2xl:text-3xl mb-12 2xl:mb-16 font-light text-white/90 max-w-2xl lg:max-w-3xl 2xl:max-w-5xl mx-auto drop-shadow-md transition-all duration-300 tracking-wide animate-fade-in-up stagger-1">
             {description}
         </p>
-        <a href="#portfolio" class="font-serif italic text-xl 2xl:text-2xl text-white hover:text-brand-sunset transition-colors border-b border-brand-sunset pb-1 animate-fade-in-up stagger-2">View the Portfolio</a>
+        <Button href="#portfolio" variant="link" class="text-xl 2xl:text-2xl text-white animate-fade-in-up stagger-2">View the Portfolio</Button>
     </div>
 </header>

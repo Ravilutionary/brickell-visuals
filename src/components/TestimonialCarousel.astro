@@ -5,7 +5,18 @@ interface Props {
 
 const { testimonials } = Astro.props;
 ---
-<div class="relative overflow-hidden group">
+<div 
+    class="relative overflow-hidden group" 
+    x-data={`{ 
+        currentTestimonial: 0,
+        testimonials: ${JSON.stringify(testimonials)},
+        init() {
+            setInterval(() => {
+                this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
+            }, 8000);
+        }
+    }`}
+>
     <div class="flex transition-transform duration-700 ease-in-out" :style="`transform: translateX(-${currentTestimonial * 100}%)`">
         <template x-for="t in testimonials" :key="t.id">
             <div class="w-full flex-shrink-0 px-4">

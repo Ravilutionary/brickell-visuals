@@ -4,16 +4,45 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+const categories = [
+    { id: 'all', label: 'All' },
+    { id: 'portrait', label: 'Portraits' },
+    { id: 'product', label: 'Products' },
+    { id: 'realestate', label: 'Real Estate' }
+];
 ---
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-12 transition-all duration-300">
-    <template x-for="item in filteredGallery" :key="item.title">
-        <div class="group relative overflow-hidden aspect-[4/5] cursor-crosshair transform transition-all duration-700 hover:z-10 animate-fade-in-up" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
-            <img :src="item.sm" :alt="item.alt" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" loading="lazy" width="800" height="1000">
-            <div class="absolute inset-0 bg-brand-navy/70 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 2xl:p-12">
-                <p class="text-brand-sunset dark:text-brand-sunset text-xs 2xl:text-sm font-bold uppercase tracking-[0.2em] mb-2" x-text="item.catLabel"></p>
-                <h3 class="text-white text-2xl 2xl:text-4xl font-serif font-bold mb-4" x-text="item.title"></h3>
-                <a :href="item.lg" class="glightbox inline-flex items-center text-white/80 hover:text-white transition-colors 2xl:text-lg border-b border-white/20 pb-1 w-fit">View Full Frame →</a>
+<div x-data={`{ 
+    filter: 'all', 
+    galleryItems: ${JSON.stringify(items)},
+    get filteredGallery() {
+        return this.filter === 'all' ? this.galleryItems : this.galleryItems.filter(i => i.cat === this.filter);
+    }
+}`}>
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 md:gap-4 p-1 2xl:p-2 bg-base-300/50 backdrop-blur-sm rounded-sm transform md:-translate-y-12 2xl:-translate-y-16 w-fit mx-auto md:ml-auto md:mr-0 mb-12">
+        {categories.map(cat => (
+            <button 
+                @click={`filter = '${cat.id}'`} 
+                :class={`filter === '${cat.id}' ? 'bg-brand-navy text-white shadow-lg shadow-brand-navy/30' : 'text-base-content hover:bg-base-300'`}
+                class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all duration-300"
+            >
+                {cat.label}
+            </button>
+        ))}
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 2xl:gap-12 transition-all duration-300">
+        <template x-for="item in filteredGallery" :key="item.title">
+            <div class="group relative overflow-hidden aspect-[4/5] cursor-crosshair transform transition-all duration-700 hover:z-10 animate-fade-in-up" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+                <img :src="item.sm" :alt="item.alt" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" loading="lazy" width="800" height="1000">
+                <div class="absolute inset-0 bg-brand-navy/70 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 2xl:p-12">
+                    <p class="text-brand-sunset dark:text-brand-sunset text-xs 2xl:text-sm font-bold uppercase tracking-[0.2em] mb-2" x-text="item.catLabel"></p>
+                    <h3 class="text-white text-2xl 2xl:text-4xl font-serif font-bold mb-4" x-text="item.title"></h3>
+                    <a :href="item.lg" class="glightbox inline-flex items-center text-white/80 hover:text-white transition-colors 2xl:text-lg border-b border-white/20 pb-1 w-fit">View Full Frame →</a>
+                </div>
             </div>
-        </div>
-    </template>
+        </template>
+    </div>
 </div>

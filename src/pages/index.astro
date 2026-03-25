@@ -13,6 +13,7 @@ import BookingForm from '../components/BookingForm.astro';
 
 import Container from '../components/Container.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
 
 // Fetch Data from Collections
 const services = await getCollection('services');
@@ -32,8 +33,8 @@ const blogPosts = await getCollection('blog');
     />
 
     <!-- Signature Services -->
-    <section id="services" class="py-24 2xl:py-32 transition-colors duration-500 border-b border-base-300">
-        <Container>
+    <section id="services" class="transition-colors duration-500 border-b border-base-300">
+        <Container padding={true}>
             <div class="flex flex-col md:flex-row justify-between items-end gap-8 overflow-visible">
                 <SectionHeader 
                     title="Signature" 
@@ -54,59 +55,33 @@ const blogPosts = await getCollection('blog');
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 2xl:py-32 bg-base-200/30 transition-colors duration-300" x-data="{ 
-        filter: 'all', 
-        galleryItems: [],
-        init() {
-            this.galleryItems = JSON.parse($el.dataset.items);
-        },
-        get filteredGallery() {
-            return this.filter === 'all' ? this.galleryItems : this.galleryItems.filter(i => i.cat === this.filter);
-        }
-    }" data-items={JSON.stringify(gallery)}>
-        <Container>
-            <div class="flex flex-col md:flex-row justify-between items-center mb-0 gap-8">
-                <SectionHeader 
-                    title="Brickell" 
-                    accent="Portfolio"
-                />
-                
-                <div class="flex flex-wrap justify-center gap-2 md:gap-4 p-1 2xl:p-2 bg-base-300/50 backdrop-blur-sm rounded-sm transform md:-translate-y-12 2xl:-translate-y-16">
-                    <button @click="filter = 'all'" :class="filter === 'all' ? 'bg-brand-navy text-white shadow-lg shadow-brand-navy/30' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all duration-300">All</button>
-                    <button @click="filter = 'portrait'" :class="filter === 'portrait' ? 'bg-brand-navy text-white shadow-lg' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all">Portraits</button>
-                    <button @click="filter = 'product'" :class="filter === 'product' ? 'bg-brand-navy text-white shadow-lg' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all">Products</button>
-                    <button @click="filter = 'realestate'" :class="filter === 'realestate' ? 'bg-brand-navy text-white shadow-lg' : 'text-base-content hover:bg-base-300'" class="px-6 2xl:px-8 py-2 2xl:py-3 rounded-sm text-xs 2xl:text-sm font-bold uppercase tracking-widest transition-all">Real Estate</button>
-                </div>
-            </div>
-
+    <section id="portfolio" class="bg-base-200/30 transition-colors duration-300">
+        <Container padding={true}>
+            <SectionHeader 
+                title="Brickell" 
+                accent="Portfolio"
+            />
             <GalleryGrid items={gallery} />
         </Container>
     </section>
 
     <!-- Testimonials -->
-    <section class="py-24 2xl:py-48 transition-colors duration-300 overflow-hidden" x-data="{ 
-        currentTestimonial: 0,
-        testimonials: [],
-        init() {
-            this.testimonials = JSON.parse($el.dataset.list);
-            setInterval(() => {
-                this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
-            }, 8000);
-        }
-    }" data-list={JSON.stringify(testimonials)}>
-        <TestimonialCarousel testimonials={testimonials} />
+    <section class="transition-colors duration-300 overflow-hidden">
+        <Container padding={true}>
+            <TestimonialCarousel testimonials={testimonials} />
+        </Container>
     </section>
 
     <!-- Social Proof & Blog -->
-    <section class="py-24 2xl:py-32 bg-base-200/50 transition-colors duration-300">
-        <Container>
+    <section class="bg-base-200/50 transition-colors duration-300">
+        <Container padding={true}>
             <div class="flex flex-col md:flex-row justify-between items-end gap-8">
                 <SectionHeader 
                     title="The" 
                     accent="Journal" 
                     description="Insights on Miami's evolving visual landscape, technical deep-dives, and behind-the-scenes at our most complex shoots."
                 />
-                <a href="#" class="btn btn-ghost border-brand-navy/20 2xl:btn-lg font-bold tracking-widest uppercase text-xs 2xl:text-sm transform md:-translate-y-12 2xl:-translate-y-16">View All Articles</a>
+                <Button href="#" variant="outline" class="transform md:-translate-y-12 2xl:-translate-y-16">View All Articles</Button>
             </div>
 
             <BlogTeaser posts={blogPosts} />
@@ -114,12 +89,12 @@ const blogPosts = await getCollection('blog');
     </section>
 
     <!-- Final CTA -->
-    <section id="book" class="py-24 2xl:py-48 bg-brand-navy relative overflow-hidden">
+    <section id="book" class="bg-brand-navy relative overflow-hidden">
         <div class="absolute inset-0 opacity-20 pointer-events-none grayscale">
             <img src="https://images.unsplash.com/photo-1533282960533-51328aa26ee8?auto=format&fit=crop&w=2600&q=80" alt="Background" class="w-full h-full object-cover">
         </div>
         
-        <Container>
+        <Container padding={true}>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div>
                     <h2 class="text-5xl md:text-7xl 2xl:text-9xl font-serif text-white font-bold mb-10 2xl:mb-16 leading-tight">Elevate <br/>Your Visual <br/><span class="text-brand-sunset italic font-normal">Standard</span></h2>
@@ -143,17 +118,3 @@ const blogPosts = await getCollection('blog');
 
     <Footer />
 </Layout>
-
-<style is:global>
-    /* Global Glass Effects */
-    .glass-navy {
-        background: rgba(10, 17, 40, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-    }
-    
-    /* Smooth Scroll */
-    html {
-        scroll-behavior: smooth;
-    }
-</style>

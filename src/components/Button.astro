@@ -1,0 +1,38 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline' | 'link';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  [key: string]: any;
+}
+
+const { href, variant = 'primary', size = 'md', class: className, ...props } = Astro.props;
+
+const baseStyles = "inline-flex items-center justify-center transition-all duration-300 transition-all";
+
+const variants = {
+  primary: "bg-brand-navy text-white hover:bg-brand-sunset hover:text-brand-navy shadow-lg uppercase tracking-widest font-bold font-serif",
+  secondary: "bg-brand-sunset text-brand-navy hover:bg-brand-navy hover:text-white uppercase tracking-widest font-bold font-serif",
+  ghost: "btn btn-ghost hover:bg-base-200 uppercase tracking-widest font-bold",
+  outline: "border border-brand-navy/20 hover:border-brand-sunset hover:text-brand-sunset uppercase tracking-widest font-bold",
+  link: "font-serif italic hover:text-brand-sunset border-b border-brand-sunset pb-1"
+};
+
+const sizes = {
+  sm: "px-4 py-2 text-[10px] 2xl:text-xs",
+  md: "px-6 py-3 2xl:px-10 2xl:py-5 text-xs 2xl:text-sm",
+  lg: "px-8 py-4 2xl:px-12 2xl:py-6 text-sm 2xl:text-base",
+  none: ""
+};
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag 
+  href={href} 
+  class={`${baseStyles} ${variants[variant]} ${variant === 'link' ? sizes.none : sizes[size]} ${className || ''}`}
+  {...props}
+>
+  <slot />
+</Tag>

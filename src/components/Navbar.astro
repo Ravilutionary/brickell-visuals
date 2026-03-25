@@ -1,8 +1,10 @@
 ---
 import { SITE, NAV_LINKS } from '../consts';
+import Container from './Container.astro';
+import Button from './Button.astro';
 ---
-<nav class="fixed w-full z-50 transition-all duration-500 border-b" :class="scrolled ? 'glass-premium shadow-xl py-2 border-base-300' : 'py-4 md:py-6 border-transparent bg-transparent'" aria-label="Main Navigation">
-    <div class="container mx-auto px-6 2xl:px-12 max-w-[1600px] flex justify-between items-center">
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b" :class="scrolled ? 'glass-premium shadow-xl py-2 border-base-300' : 'py-4 md:py-6 border-transparent bg-transparent'" aria-label="Main Navigation">
+    <Container class="flex justify-between items-center">
         <div class="text-2xl 2xl:text-3xl font-serif font-bold tracking-tight transition-transform duration-500 cursor-pointer" :class="[scrolled ? 'scale-90 origin-left text-brand-navy dark:text-white' : 'scale-100 text-white', !scrolled && 'drop-shadow-md']" @click="window.scrollTo(0,0)">
             {SITE.name.split(' ')[0]}<span class="font-sans font-light tracking-widest text-sm 2xl:text-base uppercase ml-1" :class="scrolled ? 'text-base-content' : 'text-white/90 text-shadow-sm'">{SITE.name.split(' ')[1]}</span>
         </div>
@@ -18,7 +20,7 @@ import { SITE, NAV_LINKS } from '../consts';
                 <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                 <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             </button>
-            <a href="#book" class="btn bg-brand-navy dark:bg-brand-sunset hover:bg-brand-sunset dark:hover:bg-brand-navy text-white border-none rounded-none px-6 sm:px-8 2xl:px-10 2xl:text-lg font-bold tracking-widest uppercase text-xs transition-all duration-500 shadow-lg shadow-brand-navy/20">Book Now</a>
+            <Button href="#book" class="shadow-lg shadow-brand-navy/20">Book Now</Button>
         </div>
-    </div>
+    </Container>
 </nav>
